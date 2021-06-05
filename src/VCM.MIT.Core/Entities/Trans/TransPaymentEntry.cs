@@ -33,6 +33,7 @@ namespace VCM.MIT.Entities
         public string StoreNo { get; set; }
         [StringLength(3)]
         public string PosNo { get; set; }
+        public DateTime PaymentDate { get; set; }
         public int ShiftCode { get; set; }
         [StringLength(10)]
         public string CashierID { get; set; }
@@ -40,7 +41,8 @@ namespace VCM.MIT.Entities
         public string TenderType { get; set; }
         public decimal ExchangeRate { get; set; }
         public decimal AmountTendered { get; set; }
-        public decimal CurrencyCode { get; set; }
+        [StringLength(3)]
+        public string CurrencyCode { get; set; }
         public decimal AmountInCurrency { get; set; }
         public int CardPaymentType { get; set; }
         public decimal CardValue { get; set; }
@@ -48,7 +50,7 @@ namespace VCM.MIT.Entities
         public string ReferenceNo { get; set; }
         [StringLength(50)]
         public string PayForOrderNo { get; set; }
-        [StringLength(50)]
+        [StringLength(500)]
         public string TransactionNo { get; set; }
     }
 }

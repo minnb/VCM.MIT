@@ -39,15 +39,19 @@ namespace VCM.MIT.Entities
         public string CashierID { get; set; }
         public decimal DiscountAmount { get; set; }
         public decimal AmountInclVAT { get; set; }
+        [StringLength(10)]
+        public string OrderType { get; set; }
         public int Status { get; set; }
         [StringLength(30)]
-        public string CustCode { get; set; }
+        public string CustNo { get; set; }
         [StringLength(150)]
         public string CustName { get; set; }
         [StringLength(50)]
         public string CustPhone { get; set; }
         [StringLength(50)]
         public string MemberCardNo { get; set; }
+        public decimal MemberPointsEarn { get; set; }
+        public decimal MemberPointsRedeem { get; set; }
         public int DeliveringMethod { get; set; }
         [StringLength(150)]
         public string DeliveryToName { get; set; }
@@ -71,7 +75,7 @@ namespace VCM.MIT.Entities
         [StringLength(30)]
         public string ReferenceNo { get; set; }
         public bool IsInvoice { get; set; }
-        [StringLength(MITConsts.MaxDescriptionLength)]
+        [StringLength(1500)]
         public string InvoiceInfo { get; set; }
         public DateTime StartingTime { get; set; }
         public DateTime EndingTime { get; set; }

@@ -52,6 +52,8 @@ namespace VCM.MIT
             //         typeof(MITApplicationModule).GetAssembly()
             //     );
 
+            Configuration.BackgroundJobs.IsJobExecutionEnabled = false;
+
             ConfigureTokenAuth();
         }
 

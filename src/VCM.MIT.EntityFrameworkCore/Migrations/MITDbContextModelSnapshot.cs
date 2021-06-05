@@ -1527,27 +1527,386 @@ namespace VCM.MIT.Migrations
                     b.ToTable("AbpUsers");
                 });
 
-            modelBuilder.Entity("VCM.MIT.Entities.Item", b =>
+            modelBuilder.Entity("VCM.MIT.Data.Entities.CashDeposit", b =>
                 {
-                    b.Property<string>("ItemNo")
-                        .HasMaxLength(18)
-                        .HasColumnType("nvarchar(18)");
+                    b.Property<string>("AppCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("StoreNo")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("PosCashId")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("LineNo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Denomination")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("DenominationCode")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("AppCode", "StoreNo", "PosCashId", "LineNo");
+
+                    b.ToTable("M_POSCashDeposit");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Data.Entities.EndOfDay", b =>
+                {
+                    b.Property<string>("StoreNo")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
 
                     b.Property<string>("AppCode")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("BankAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BeginingCashAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CashAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("MemberPoint")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MerchandiseSalesAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("MerchandiseSalesCust")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MerchandiseSalesQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("NonTaxSalesAmoun")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("NonTaxSalesQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PayExceed")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrepaidCard")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("QRPayment")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("RetunTaxablesAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RetunTaxablesQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ReturnMerchandiseAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ReturnMerchandiseCust")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReturnMerchandiseQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ReturnNonTaxAmoun")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ReturnNonTaxQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ReturnVouche")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TaxablesSalesAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Voucher")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("StoreNo", "AppCode", "EntryDate");
+
+                    b.ToTable("M_POSEndOfDay");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Data.Entities.EndOfUser", b =>
+                {
+                    b.Property<string>("AppCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("StoreNo")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("StaffID")
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<int>("ShiftNo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("BankAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BeginingCashAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CashAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Drawfoat")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("LogicalCash")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MemberPoint")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MerchandiseSalesAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("MerchandiseSalesCust")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MerchandiseSalesQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("NonTaxSalesAmoun")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("NonTaxSalesQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("OverShort")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PayExceed")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrepaidCard")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("QRPayment")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("RetunTaxablesAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RetunTaxablesQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ReturnMerchandiseAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ReturnMerchandiseCust")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReturnMerchandiseQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ReturnNonTaxAmoun")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ReturnNonTaxQty")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ReturnVouche")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TaxablesSalesAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Voucher")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("AppCode", "StoreNo", "StaffID", "ShiftNo");
+
+                    b.ToTable("M_POSEndOfUser");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Data.Entities.WareHouse", b =>
+                {
+                    b.Property<string>("AppCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("WareHouseCode")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("StoreNo")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("WareHouseName")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("AppCode", "WareHouseCode");
+
+                    b.ToTable("M_StoreWareHouse");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.Item", b =>
+                {
+                    b.Property<string>("AppCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ItemNo")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
 
                     b.Property<string>("BaseUOM")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Blocked")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CommissionGroup")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CostingMethod")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationTime")
@@ -1565,13 +1924,6 @@ namespace VCM.MIT.Migrations
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DivisionCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("GrossWeight")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
@@ -1584,6 +1936,10 @@ namespace VCM.MIT.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ItemGroupCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("ItemName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -1591,9 +1947,6 @@ namespace VCM.MIT.Migrations
                     b.Property<string>("ItemTrackingCode")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("LastDateModified")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2");
@@ -1618,28 +1971,16 @@ namespace VCM.MIT.Migrations
                     b.Property<decimal>("MinimumOrderQuantity")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("NetWeight")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("OrderMultiple")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PluCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PriceIncludesVAT")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductGroupCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ProductionBOMNo")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("ReorderQuantity")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("SafetyStockQuantity")
                         .HasColumnType("decimal(18,2)");
@@ -1656,22 +1997,14 @@ namespace VCM.MIT.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("StandardCost")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("StatisticsGroup")
-                        .HasColumnType("int");
-
                     b.Property<string>("TaxGroupCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("UnitCost")
-                        .HasColumnType("decimal(18,2)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("UnitVolume")
+                    b.Property<decimal>("VAT")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("VendorItemNo")
@@ -1682,9 +2015,634 @@ namespace VCM.MIT.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("ItemNo");
+                    b.HasKey("AppCode", "ItemNo");
 
                     b.ToTable("M_Item");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.ItemGroup", b =>
+                {
+                    b.Property<string>("AppCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("GroupCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ExtCode1")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ExtCode2")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ExtCode3")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ExtCode4")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ExtCode5")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<decimal>("ExtValue1")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ExtValue2")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ExtValue3")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ExtValue4")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ExtValue5")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("GroupName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Profit1")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Profit2")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Profit3")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("AppCode", "GroupCode");
+
+                    b.ToTable("M_ItemGroup");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.ItemUOM", b =>
+                {
+                    b.Property<string>("ItemNo")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
+                    b.Property<string>("BaseUOM")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Cubage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Length")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("QtyPerUOM")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("SalesUOM")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Width")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("ItemNo", "BaseUOM");
+
+                    b.ToTable("M_ItemUOM");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.Store.Store", b =>
+                {
+                    b.Property<string>("StoreNo")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("Address1")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Address2")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("City")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailAddress")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("LocationCode")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("MerchCd")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("NoOfPOSConnected")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("RegionCode")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<string>("StoreName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("TaxID")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("StoreNo");
+
+                    b.ToTable("M_Store");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.TaxGroup", b =>
+                {
+                    b.Property<string>("AppCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("TaxCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("VATPercent")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("AppCode", "TaxCode");
+
+                    b.ToTable("M_ItemTaxGroup");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.Tender.TenderType", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("StoreNo")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("AccountNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AskForDate")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("BankAccountName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("BankAccountNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("BankAccountType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("CardAccountNo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ChangeTenderCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("DrawerOpens")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FloatAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ForeignCurrency")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Function")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("KeyboardEntryAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("ManagerKeyControl")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("MaxAmountAllowed")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MaxAmountEntered")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MinAmountAllowed")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MinAmountEntered")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("OvertenderAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("OvertenderMaxAmt")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("ReturnVoucher")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Rounding")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("RoundingTo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Used")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Code", "StoreNo");
+
+                    b.ToTable("M_TenderType");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.Tender.TenderTypeSetup", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Caption")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CurrencyCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("DefaultCardTender")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DefaultCurrencyTender")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DefaultFunction")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInstallmentSell")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefKey1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RefKey2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("SeqOnPOS")
+                        .HasColumnType("int");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("M_TenderTypeSetup");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.Trans.TransDiscountEntry", b =>
+                {
+                    b.Property<string>("OrderNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("LineNo_")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("DiscountType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ItemNo")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("LineGroup")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OfferNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("OfferType")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("OrderLineNo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParentLineNo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Qty")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrderNo", "LineNo_");
+
+                    b.ToTable("M_TransDiscountEntry");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.Trans.TransInfoCodeEntry", b =>
+                {
+                    b.Property<string>("OrderNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("LineNo_")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Infocode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Infomation")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ItemNo")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Options")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("OrderLineNo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParentLineNo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SourceCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("SubCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TextType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypeOfInput")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderNo", "LineNo_");
+
+                    b.ToTable("M_TransInfoCodeEntry");
                 });
 
             modelBuilder.Entity("VCM.MIT.Entities.TransHeader", b =>
@@ -1718,12 +2676,17 @@ namespace VCM.MIT.Migrations
                     b.Property<long?>("CreatorUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("CustomerCode")
+                    b.Property<string>("CustName")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("CustNo")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("CustPhone")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<long?>("DeleterUserId")
                         .HasColumnType("bigint");
@@ -1741,25 +2704,28 @@ namespace VCM.MIT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeliveryToAddress")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("DeliveryToDistrict")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeliveryToHub")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DeliveryToName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("DeliveryToPhone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("DeliveryToProvince")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DeliveryToWard")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("DiscountAmount")
                         .HasColumnType("decimal(18,2)");
@@ -1775,10 +2741,14 @@ namespace VCM.MIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("InvoiceInfo")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IssuedVATInvoice")
+                    b.Property<bool>("IsInvoice")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -1791,17 +2761,31 @@ namespace VCM.MIT.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<decimal>("MemberPointsEarn")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MemberPointsRedeem")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OrderTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("OrderType")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("PosNo")
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
+                    b.Property<DateTime>("PrintedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("PrintedNumber")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.Property<string>("RefKey1")
@@ -1812,15 +2796,12 @@ namespace VCM.MIT.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Returned")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReturnedReceiptNo")
+                    b.Property<string>("ReferenceNo")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<bool>("SendingStatus")
-                        .HasColumnType("bit");
+                    b.Property<int>("Returned")
+                        .HasColumnType("int");
 
                     b.Property<int>("ShiftCode")
                         .HasColumnType("int");
@@ -1900,7 +2881,8 @@ namespace VCM.MIT.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ItemName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("ItemNo")
                         .HasMaxLength(18)
@@ -1966,10 +2948,15 @@ namespace VCM.MIT.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("VatGroup")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal>("VatPercent")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("WareHouseCode")
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.HasKey("OrderNo", "LineNo_");
 
@@ -2007,8 +2994,9 @@ namespace VCM.MIT.Migrations
                     b.Property<long?>("CreatorUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<decimal>("CurrencyCode")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("CurrencyCode")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<long?>("DeleterUserId")
                         .HasColumnType("bigint");
@@ -2036,6 +3024,9 @@ namespace VCM.MIT.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PosNo")
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
@@ -2056,12 +3047,86 @@ namespace VCM.MIT.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("TransactionNo")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("OrderNo", "LineNo_");
 
                     b.ToTable("M_TransPaymentEntry");
+                });
+
+            modelBuilder.Entity("VCM.MIT.Entities.TransRaw", b =>
+                {
+                    b.Property<string>("TranNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("StoreNo")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("CompanyCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("AppCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DateInsert")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EntryDate")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("IPAddress")
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("MACAddress")
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("PosNo")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<string>("RawData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdateFlg")
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("TranNo", "StoreNo", "CompanyCode", "AppCode");
+
+                    b.ToTable("M_TransRaw");
                 });
 
             modelBuilder.Entity("VCM.MIT.MultiTenancy.Tenant", b =>

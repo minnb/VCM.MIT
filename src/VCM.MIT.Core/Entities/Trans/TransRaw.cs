@@ -21,12 +21,19 @@ namespace VCM.MIT.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public override Guid Id { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [StringLength(10)]
+        [Key]
         public string CompanyCode { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [StringLength(10)]
+        [Key]
         public string AppCode { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [StringLength(6)]
-        public string StoreCode { get; set; }
+        [Key]
+        public string StoreNo { get; set; }
         [StringLength(12)]
         public string EntryDate { get; set; }
         [StringLength(MITConsts.OrderNoStringLength)]

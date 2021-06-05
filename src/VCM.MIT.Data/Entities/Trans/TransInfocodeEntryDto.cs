@@ -3,7 +3,7 @@ using Abp.Application.Services.Dto;
 
 namespace VCM.MIT.Data.Entities.Trans
 {
-    public class TransInfocodeEntryDto : FullAuditedEntityDto<Guid>
+    public class TransInfoCodeEntryDto : FullAuditedEntityDto<Guid>
     {
 		public new Guid? Id { get; set; }
 		public string OrderNo { get; set; }
@@ -23,13 +23,13 @@ namespace VCM.MIT.Data.Entities.Trans
 	}
 	public class TransInfocodeEntryViewDto
 	{
-		public TransInfocodeEntryDto TransInfocodeEntryDto { get; set; }
+		public TransInfoCodeEntryDto TransInfocodeEntryDto { get; set; }
 	}
-	public class CreateTransInfocodeEntryDto : TransInfocodeEntryDto
+	public class CreateTransInfocodeEntryDto : TransInfoCodeEntryDto
 	{
 
 	}
-	public class TransInfocodeEntryFilterDto : TransInfocodeEntryDto
+	public class TransInfocodeEntryFilterDto : TransInfoCodeEntryDto
 	{
 	}
 }

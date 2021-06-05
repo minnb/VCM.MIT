@@ -1,9 +1,8 @@
-﻿using Abp.Domain.Entities.Auditing;
-using System;
+﻿using Abp.Application.Services.Dto;
 
 namespace VCM.MIT.Data.Entities.Tender
 {
-    public class TenderTypeDto : FullAuditedEntity<int>
+    public class TenderTypeDto : FullAuditedEntityDto<int>
     {
         public string StoreNo { get; set; }
         public string Code { get; set; }

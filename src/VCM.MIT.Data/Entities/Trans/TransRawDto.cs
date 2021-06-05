@@ -1,13 +1,14 @@
-﻿using Abp.Domain.Entities.Auditing;
+﻿using Abp.Application.Services.Dto;
 using System;
 
 namespace VCM.MIT.Data.Entities.Trans
 {
-    public class TransRawDto : FullAuditedEntity<Guid>
+    public class TransRawDto : FullAuditedEntityDto<Guid>
     {
+        public new Guid? Id { get; set; }
         public string CompanyCode { get; set; }
         public string AppCode { get; set; }
-        public string StoreCode { get; set; }
+        public string StoreNo { get; set; }
         public string EntryDate { get; set; }
         public string TranNo { get; set; }
         public string PosNo { get; set; }

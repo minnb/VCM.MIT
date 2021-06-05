@@ -22,17 +22,15 @@ namespace VCM.MIT.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public override long Id { get; set; }
-
         [StringLength(18)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public string ItemNo { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         [StringLength(10)]
         public string AppCode { get; set; }
-
+        [StringLength(20)]
         public string PluCode { get; set; }
         [StringLength(MITConsts.MaxTitleLength)]
         public string ItemName { get; set; }
@@ -42,35 +40,27 @@ namespace VCM.MIT.Entities
         public string LongDescription { get; set; }
         public int Blocked { get; set; }
         public int Critical { get; set; }
-        public int TaxGroupCode { get; set; }
+        public decimal VAT { get; set; }
+        [StringLength(20)]
+        public string TaxGroupCode { get; set; }
         [StringLength(MITConsts.UOMStringLength)]
         public string BaseUOM { get; set; }
         [StringLength(MITConsts.UOMStringLength)]
         public string SalesUOM { get; set; }
         public decimal UnitPrice { get; set; }
-        public int CostingMethod { get; set; }
-        public decimal UnitCost { get; set; }
-        public decimal StandardCost { get; set; }
-        [StringLength(20)]
-        public string VendorNo { get; set; }
-        [StringLength(20)]
-        public string VendorItemNo { get; set; }
         public decimal MaximumInventory { get; set; }
-        public decimal ReorderQuantity { get; set; }
-        public decimal GrossWeight { get; set; }
-        public decimal NetWeight { get; set; }
-        public decimal UnitVolume { get; set; }
-        public int PriceIncludesVAT { get; set; }
         public decimal MinimumOrderQuantity { get; set; }
         public decimal MaximumOrderQuantity { get; set; }
         public decimal SafetyStockQuantity { get; set; }
         public decimal OrderMultiple { get; set; }
+        [StringLength(20)]
+        public string VendorNo { get; set; }
+        [StringLength(20)]
+        public string VendorItemNo { get; set; }
         [StringLength(50)]
         public string ManufacturerCode { get; set; }
         [StringLength(50)]
         public string ItemCategoryCode { get; set; }
-        [StringLength(50)]
-        public string ProductGroupCode { get; set; }
         [StringLength(50)]
         public string ServiceItemGroup { get; set; }
         [StringLength(50)]
@@ -78,9 +68,6 @@ namespace VCM.MIT.Entities
         [StringLength(50)]
         public string ProductionBOMNo { get; set; }
         [StringLength(50)]
-        public string DivisionCode { get; set; }
-        public int StatisticsGroup { get; set; }
-        public int CommissionGroup { get; set; }
-        public DateTime LastDateModified { get; set; }
+        public string ItemGroupCode { get; set; }
     }
 }

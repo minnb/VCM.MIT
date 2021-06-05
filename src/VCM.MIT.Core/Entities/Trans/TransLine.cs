@@ -31,6 +31,7 @@ namespace VCM.MIT.Entities
         public int LineType { get; set; }
         [StringLength(18)]
         public string ItemNo { get; set; }
+        [StringLength(250)]
         public string ItemName { get; set; }
         [StringLength(10)]
         public string UOM { get; set; }
@@ -40,6 +41,7 @@ namespace VCM.MIT.Entities
         public decimal DiscountAmount { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal LineAmountExcVat { get; set; }
+        [StringLength(10)]
         public string VatGroup { get; set; }
         public decimal VatPercent { get; set; }
         public decimal VatAmount { get; set; }
@@ -51,6 +53,8 @@ namespace VCM.MIT.Entities
         public int BluePointsEarn { get; set; }
         public decimal AmountCalPoint { get; set; }
         public DateTime ScanTime { get; set; }
+        [StringLength(8)]
+        public string WareHouseCode { get; set; }
         [StringLength(30)]
         public string Barcode { get; set; }
         [StringLength(50)]

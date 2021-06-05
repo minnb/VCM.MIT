@@ -21,72 +21,32 @@ namespace VCM.MIT.Entities.Store
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public override int Id { get; set; }
-
         [StringLength(6)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public string StoreNo { get; set; }
-        [StringLength(MITConsts.MaxTitleLength)]
+        [StringLength(200)]
         public string StoreName { get; set; }
-        [StringLength(10)]
+        [StringLength(6)]
         public string LocationCode { get; set; }
-        [StringLength(MITConsts.MaxTitleLength)]
-        public string Address1 { get; set; }
-        [StringLength(MITConsts.MaxTitleLength)]
-        public string Address2 { get; set; }
         [StringLength(20)]
         public string Phone { get; set; }
-        [StringLength(100)]
+        [StringLength(20)]
         public string City { get; set; }
-        [StringLength(20)]
-        public string PostCode { get; set; }
-        [StringLength(20)]
-        public string CountryCode { get; set; }
-        [StringLength(20)]
-        public string StoreManagerID { get; set; }
-        [StringLength(100)]
+        [StringLength(200)]
+        public string Address1 { get; set; }
+        [StringLength(200)]
+        public string Address2 { get; set; }
+        [StringLength(50)]
         public string EmailAddress { get; set; }
-        [StringLength(50)]
-        public string TaxCode { get; set; }
-        [StringLength(50)]
-        public string BranchNo { get; set; }
-        public DateTime StoreOpenfrom { get; set; }
-        public DateTime StoreOpento { get; set; }
-        [StringLength(10)]
-        public string CurrencyCode { get; set; }
-        public int StoreOpenAfterMidnight { get; set; }
-        [StringLength(50)]
-        public string FunctionalityProfile { get; set; }
-        [StringLength(50)]
-        public string MenuProfile { get; set; }
-        [StringLength(50)]
-        public string InterfaceProfile { get; set; }
-        [StringLength(50)]
-        public string StyleProfile { get; set; }
-        [StringLength(50)]
-        public string HardwareProfile { get; set; }
-        [StringLength(50)]
-        public string StatementNos { get; set; }
-        public int OneStatementPerDay { get; set; }
-        public int StatementMethod { get; set; }
-        public int ClosingMethod { get; set; }
-        [StringLength(50)]
-        public string RoundingAccount { get; set; }
-        [StringLength(50)]
-        public string TotalDiscountTender { get; set; }
-        [StringLength(100)]
-        public string PrintReceiptLogo { get; set; }
-        public int PrintReceiptBitmapNo { get; set; }
-        public int ItemNoOnReceipt { get; set; }
-        public int ForEvent { get; set; }
-        [StringLength(50)]
-        public string InfocodeAdjustBill { get; set; }
-        [StringLength(50)]
-        public string InfocodeAdjustLine { get; set; }
-        [StringLength(50)]
-        public string CustomerDefault { get; set; }
-        [StringLength(50)]
-        public string ResponsibilityCenter { get; set; }
-        public DateTime LastDateModified { get; set; }
+        [StringLength(3)]
+        public string RegionCode { get; set; }
+        public int NoOfPOSConnected { get; set; }
+        [StringLength(20)]
+        public string MerchCd { get; set; }
+        [StringLength(30)]
+        public string TaxID { get; set; }
+        [Required]
+        public bool Blocked { get; set; } = false;
     }
 }

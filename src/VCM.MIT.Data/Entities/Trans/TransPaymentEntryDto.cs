@@ -16,7 +16,7 @@ namespace VCM.MIT.Data.Entities.Trans
 		public string TenderType { get; set; }
 		public decimal ExchangeRate { get; set; }
 		public decimal AmountTendered { get; set; }
-		public decimal CurrencyCode { get; set; }
+		public string CurrencyCode { get; set; }
 		public decimal AmountInCurrency { get; set; }
 		public int CardPaymentType { get; set; }
 		public decimal CardValue { get; set; }

@@ -1,5 +1,7 @@
 ﻿using Abp.Authorization;
+using Abp.Authorization.Users;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.MultiTenancy;
 using Abp.Runtime.Security;
@@ -7,6 +9,7 @@ using Abp.UI;
 using Castle.Core.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -21,9 +24,9 @@ using VCM.MIT.Authorization;
 using VCM.MIT.Authorization.Roles;
 using VCM.MIT.Authorization.Users;
 using VCM.MIT.Controllers;
-using VCM.MIT.Identity;
 using VCM.MIT.Models.TokenAuth;
-using VCM.MIT.Web.Host.ViewModels;
+using VCM.MIT.Models.Trans;
+using VCM.MIT.Models.User;
 
 namespace VCM.MIT.Web.Host.Controllers
 {
@@ -37,6 +40,8 @@ namespace VCM.MIT.Web.Host.Controllers
         private readonly LogInManager _logInManager;
         private readonly AbpUserClaimsPrincipalFactory<User, Role> _claimsPrincipalFactory;
         private readonly ILogger _logger;
+        private readonly RoleManager _roleManager;
+        private readonly UserManager _userManager;
 
         public AccountController(
             ITenantCache tenantCache,
@@ -46,7 +51,9 @@ namespace VCM.MIT.Web.Host.Controllers
             LogInManager logInManager,
             AbpUserClaimsPrincipalFactory<User, Role> claimsPrincipalFactory,
             ILogger logger,
-            IOptions<JwtBearerOptions> jwtOptions
+            IOptions<JwtBearerOptions> jwtOptions,
+            RoleManager roleManager,
+            UserManager userManager
             )
         {
             _tenantCache = tenantCache;
@@ -57,11 +64,67 @@ namespace VCM.MIT.Web.Host.Controllers
             _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
             _claimsPrincipalFactory = claimsPrincipalFactory;
             _logger = logger;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         [HttpPost]
-        [Route("api/account/login")]
-        public async Task<AuthenticateResultModel> LoginAsync([FromBody] LoginViewModel loginModel)
+        [UnitOfWork]
+        [Route("v1/api/account/create")]
+        public async Task<User> Createsync([FromBody] CreateUserModel userModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = new User
+                    {
+                        TenantId = null,
+                        AuthenticationSource = userModel.AppCode,
+                        Name = userModel.FullName,
+                        Surname = userModel.FullName,
+                        EmailAddress = userModel.EmailAddress,
+                        IsActive = true,
+                        UserName = userModel.UserName,
+                        IsEmailConfirmed = userModel.IsEmailConfirmed,
+                        IsPhoneNumberConfirmed = false,
+                        PhoneNumber = userModel.PhoneNumber,
+                        Roles = new List<UserRole>()
+                    };
+
+                    user.SetNormalizedNames();
+
+                    foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
+                    {
+                        user.Roles.Add(new UserRole(null, user.Id, defaultRole.Id));
+                    }
+
+                    await _userManager.InitializeOptionsAsync(null);
+
+                    await _userManager.CreateAsync(user, userModel.Password);
+
+                    await CurrentUnitOfWork.SaveChangesAsync();
+
+                    return user;
+                }
+                else
+                {
+                    throw new UserFriendlyException(ModelState.Values.First().Errors[0].ErrorMessage.ToString());
+                }               
+            }
+            catch (UserFriendlyException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ValidationException("Createsync Exception: ", e);
+            }
+        }
+
+        [HttpPost]
+        [Route("v1/api/account/login")]
+        public async Task<AuthenticateResultModel> LoginAsync([FromBody] LoginModel loginModel)
         {
             try
             {
@@ -99,12 +162,12 @@ namespace VCM.MIT.Web.Host.Controllers
             }
             catch (Exception e)
             {
-                throw new ValidationException("Exception ", e);
+                throw new ValidationException("LoginAsync Exception: ", e);
             }
         }
 
         [HttpPost]
-        [Route("api/account/refresh-token")]
+        [Route("v1/api/account/refresh-token")]
         public async Task<RefreshTokenResult> RefreshToken([FromBody] RefreshTokenViewModel payload)
         {
             if (string.IsNullOrWhiteSpace(payload.RefreshToken))

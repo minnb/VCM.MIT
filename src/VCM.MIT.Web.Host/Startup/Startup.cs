@@ -19,6 +19,7 @@ using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using VCM.MIT.AppService.Trans;
 
 namespace VCM.MIT.Web.Host.Startup
 {
@@ -111,6 +112,8 @@ namespace VCM.MIT.Web.Host.Startup
                 });
             });
 
+            services.AddScoped<ITransService, TransService>();
+
             // Configure Abp and Dependency Injection
             return services.AddAbp<MITWebHostModule>(
                 // Configure Log4Net logging
@@ -120,7 +123,7 @@ namespace VCM.MIT.Web.Host.Startup
                             : "log4net.Production.config"
                         )
                 )
-            );
+            );           
         }
 
         public void Configure(IApplicationBuilder app,  ILoggerFactory loggerFactory)

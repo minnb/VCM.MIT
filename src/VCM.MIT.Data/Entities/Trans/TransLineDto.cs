@@ -34,6 +34,7 @@ namespace VCM.MIT.Data.Entities.Trans
         public decimal AmountCalPoint { get; set; }
         public DateTime ScanTime { get; set; }
         public DateTime ExpireDate { get; set; }
+        public string WareHouseCode { get; set; }
         public string Barcode { get; set; }
         public string LotNo { get; set; }
         public string SerialNo { get; set; }

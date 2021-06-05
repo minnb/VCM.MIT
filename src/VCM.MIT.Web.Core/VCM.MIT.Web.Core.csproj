@@ -15,7 +15,7 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
     <RootNamespace>VCM.MIT</RootNamespace>
-    <LangVersion>7.2</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\VCM.MIT.Application\VCM.MIT.Application.csproj" />
