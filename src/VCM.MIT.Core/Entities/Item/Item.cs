@@ -43,6 +43,8 @@ namespace VCM.MIT.Entities
         public decimal VAT { get; set; }
         [StringLength(20)]
         public string TaxGroupCode { get; set; }
+        [StringLength(3)]
+        public string TaxGroupVCM { get; set; }
         [StringLength(MITConsts.UOMStringLength)]
         public string BaseUOM { get; set; }
         [StringLength(MITConsts.UOMStringLength)]

@@ -77,6 +77,9 @@ namespace VCM.MIT.Entities
         public bool IsInvoice { get; set; }
         [StringLength(1500)]
         public string InvoiceInfo { get; set; }
+        public bool InvoiceFlg { get; set; }
+        public bool UpdateFlg { get; set; }
+        public bool SendingFlg { get; set; }
         public DateTime StartingTime { get; set; }
         public DateTime EndingTime { get; set; }
         [StringLength(50)]

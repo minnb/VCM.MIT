@@ -14,6 +14,7 @@ namespace VCM.MIT.Data.Entities.Item
         public int Critical { get; set; }
         public decimal VAT { get; set; }
         public string TaxGroupCode { get; set; }
+        public string TaxGroupVCM { get; set; }
         public string BaseUOM { get; set; }
         public string SalesUOM { get; set; }
         public decimal UnitPrice { get; set; }

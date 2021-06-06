@@ -40,6 +40,9 @@ namespace VCM.MIT.Data.Entities.Trans
         public string ReferenceNo { get; set; }
         public bool IsInvoice { get; set; }
         public string InvoiceInfo { get; set; }
+        public bool InvoiceFlg { get; set; }
+        public bool UpdateFlg { get; set; }
+        public bool SendingFlg { get; set; }
         public DateTime StartingTime { get; set; }
         public DateTime EndingTime { get; set; }
         public string BillNumber { get; set; }
